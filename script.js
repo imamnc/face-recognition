@@ -50,6 +50,7 @@ async function start() {
         const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
+        alert(results);
 
         if (results.length > 1) {
             // Reset image content
