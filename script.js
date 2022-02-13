@@ -53,7 +53,6 @@ async function start() {
 
         if (results.length > 1) {
             // Reset image content
-            if (image) image.src = 'https://www.neddysnorthbayhyundai.ca/dist/img/nophoto.jpg';
             if (canvas) canvas.remove();
             // Alert
             Swal.fire({
@@ -74,7 +73,6 @@ async function start() {
                 });
             } else {
                 // Reset image content
-                if (image) image.src = 'https://www.neddysnorthbayhyundai.ca/dist/img/nophoto.jpg';
                 if (canvas) canvas.remove();
                 // Alert
                 Swal.fire({
