@@ -52,7 +52,7 @@ async function start() {
         const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
         console.log(results);
 
-        if (results) {
+        if (results != undefined) {
             if (results.length > 1) {
                 // Reset image content
                 if (canvas) canvas.remove();
