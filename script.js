@@ -50,41 +50,55 @@ async function start() {
         const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor));
-        alert(results);
+        console.log(results);
 
-        if (results.length > 1) {
-            // Reset image content
-            if (canvas) canvas.remove();
-            // Alert
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Foto wajib sendiri',
-                text: 'Foto tidak boleh menyertakan wajah orang lain !',
-                showConfirmButton: false,
-                timer: 4000
-            });
-        } else {
-            if (results[0]._label != 'unknown') {
-                // Draw label to canvas
-                results.forEach((result, i) => {
-                    const box = resizedDetections[i].detection.box;
-                    const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() });
-                    drawBox.draw(canvas);
-                });
-            } else {
+        if (results) {
+            if (results.length > 1) {
                 // Reset image content
                 if (canvas) canvas.remove();
                 // Alert
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
-                    title: 'Wajah tidak dikenali',
-                    text: 'Foto wajah anda tidak dikenali !',
+                    title: 'Foto wajib sendiri',
+                    text: 'Foto tidak boleh menyertakan wajah orang lain !',
                     showConfirmButton: false,
                     timer: 4000
                 });
+            } else {
+                if (results[0]._label != 'unknown' && results[0]._distance <= 0.6) {
+                    // Draw label to canvas
+                    results.forEach((result, i) => {
+                        const box = resizedDetections[i].detection.box;
+                        const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() });
+                        drawBox.draw(canvas);
+                    });
+                } else {
+                    // Reset image content
+                    if (canvas) canvas.remove();
+                    // Alert
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Wajah tidak dikenali',
+                        text: 'Foto wajah anda tidak dikenali !',
+                        showConfirmButton: false,
+                        timer: 4000
+                    });
+                }
             }
+        } else {
+            // Reset image content
+            if (canvas) canvas.remove();
+            // Alert
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Wajah tidak terdeteksi',
+                text: 'Harap anda memfoto lebih jelas ke wajah anda !',
+                showConfirmButton: false,
+                timer: 4000
+            });
         }
 
     })
