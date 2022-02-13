@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Face Recognition</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.0/dist/sweetalert2.min.css" integrity="sha256-fxT2vEPirY2ASBNBFCBWwEsLxCZJd3gjen03Q2lKeKE=" crossorigin="anonymous">
+    <style>
+        #result {
+            position: relative;
+            height: 60vh;
+        }
+        
+        #result img {
+            width: 100%;
+        }
+        
+        #result canvas {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+    <!-- Script -->
+    <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center py-3">
+                <div class="alert alert-warning mb-0" id="status">
+                    <strong class="d-block">Tunggu !</strong> Sedang memulai AI...
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center py-3 border-top">
+                <!-- Image Upload -->
+                <button class="btn btn-info" id="btn-camera" onclick="$('#imageUpload').click()" disabled>Ambil Foto</button>
+                <input type="file" name="imageUpload" id="imageUpload" accept="image/*" capture="camera" class="invisible d-none">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Match Result -->
+                <div id="result" class="mb-4">
+                    <img src="https://www.neddysnorthbayhyundai.ca/dist/img/nophoto.jpg" alt="image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.0/dist/sweetalert2.min.js" integrity="sha256-mGX+RwMKWqw1+HmNRmOHRSFpNp8AD09sXuK5WhxfdnU=" crossorigin="anonymous"></script>
+</body>
+
+</html>
